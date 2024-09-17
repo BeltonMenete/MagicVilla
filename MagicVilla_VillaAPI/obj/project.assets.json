@@ -4807,11 +4807,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\belto\\source\\repos\\MagicVilla\\MagicVilla_VillaAPI\\MagicVilla_VillaAPI.csproj",
+      "projectUniqueName": "C:\\Users\\belto\\source\\repos\\MagicVilla\\MagicVilla\\magicvilla_villaapi\\MagicVilla_VillaAPI.csproj",
       "projectName": "MagicVilla_VillaAPI",
-      "projectPath": "c:\\Users\\belto\\source\\repos\\MagicVilla\\MagicVilla_VillaAPI\\MagicVilla_VillaAPI.csproj",
+      "projectPath": "C:\\Users\\belto\\source\\repos\\MagicVilla\\MagicVilla\\magicvilla_villaapi\\MagicVilla_VillaAPI.csproj",
       "packagesPath": "C:\\Users\\belto\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\belto\\source\\repos\\MagicVilla\\MagicVilla_VillaAPI\\obj\\",
+      "outputPath": "C:\\Users\\belto\\source\\repos\\MagicVilla\\MagicVilla\\magicvilla_villaapi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\belto\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "By4xw5g3wOo=",
+  "dgSpecHash": "AIpcxYQpPQg=",
   "success": true,
-  "projectFilePath": "C:\\Users\\belto\\source\\repos\\MagicVilla\\MagicVilla_VillaAPI\\MagicVilla_VillaAPI.csproj",
+  "projectFilePath": "C:\\Users\\belto\\source\\repos\\MagicVilla\\MagicVilla\\magicvilla_villaapi\\MagicVilla_VillaAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\belto\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\belto\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
