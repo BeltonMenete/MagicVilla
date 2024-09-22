@@ -90,7 +90,7 @@ public class VillaController(ILogger<VillaController> logger, IVillaRepository d
         if (id != updateDTO.Id || updateDTO == null)
             return BadRequest();
 
-        var villa = await _dbVilla.GetAsync(x => x.Id == id);
+        var villa = await _dbVilla.GetAsync(x => x.Id == id, false);
 
         if (villa == null)
         {
@@ -113,7 +113,7 @@ public class VillaController(ILogger<VillaController> logger, IVillaRepository d
     public async Task<ActionResult> UpdatePartialVilla(int id, JsonPatchDocument<UpdateVillaDTO> patchDTO)
     {
         // Retrieve the existing villa entity from the database (tracking enabled)
-        var villa = await _dbVilla.GetAsync(x => x.Id == id, true);
+        var villa = await _dbVilla.GetAsync(x => x.Id == id, false);
 
         if (villa == null)
             return NotFound();  // Return 404 if villa not found

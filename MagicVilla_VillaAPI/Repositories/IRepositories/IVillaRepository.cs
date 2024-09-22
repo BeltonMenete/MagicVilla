@@ -3,17 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using magicvilla_villaapi.Repositories.IRepositories;
 using MagicVilla_VillaAPI.Models;
 
-namespace MagicVilla_VillaAPI.Repositories.IRepositories
+namespace MagicVilla_VillaAPI.Repositories.IRepositories;
+public interface IVillaRepository : IRepository<Villa>
 {
-    public interface IVillaRepository
-    {
-        Task<List<Villa>> GetAllAsync(Expression<Func<Villa, bool>>? filter = null);
-        Task<Villa> GetAsync(Expression<Func<Villa, bool>>? filter = null, bool tracked = true);
-        Task CreateAsync(Villa entity);
-        Task UpdateAsync(Villa entity);
-        Task RemoveAsync(Villa entity);
-        Task SaveAsync();
-    }
+    Task<Villa> UpdateAsync(Villa entity);
 }
