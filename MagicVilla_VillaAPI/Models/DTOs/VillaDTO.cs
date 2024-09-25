@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MagicVilla_VillaAPI.DTOs
+namespace MagicVilla_VillaAPI.Models.DTOs
 {
     public class VillaDTO
     {

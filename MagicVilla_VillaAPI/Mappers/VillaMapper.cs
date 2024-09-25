@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using MagicVilla_VillaAPI.DTOs;
+using MagicVilla_VillaAPI.Controllers.DTOs;
 using MagicVilla_VillaAPI.Models;
 
 namespace MagicVilla_VillaAPI.Mappers

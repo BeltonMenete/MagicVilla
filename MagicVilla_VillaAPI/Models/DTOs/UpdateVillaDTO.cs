@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MagicVilla_VillaAPI.DTOs
+namespace MagicVilla_VillaAPI.Models.DTOs
 {
     public class UpdateVillaDTO
     {

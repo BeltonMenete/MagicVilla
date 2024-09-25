@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\belto\\source\\repos\\MagicVilla\\MagicVilla\\magicvilla_villaapi\\MagicVilla_VillaAPI.csproj": {}
+    "C:\\Users\\belto\\source\\repos\\MagicVilla\\MagicVilla\\MagicVilla_VillaAPI\\MagicVilla_VillaAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\belto\\source\\repos\\MagicVilla\\MagicVilla\\magicvilla_villaapi\\MagicVilla_VillaAPI.csproj": {
+    "C:\\Users\\belto\\source\\repos\\MagicVilla\\MagicVilla\\MagicVilla_VillaAPI\\MagicVilla_VillaAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\belto\\source\\repos\\MagicVilla\\MagicVilla\\magicvilla_villaapi\\MagicVilla_VillaAPI.csproj",
+        "projectUniqueName": "C:\\Users\\belto\\source\\repos\\MagicVilla\\MagicVilla\\MagicVilla_VillaAPI\\MagicVilla_VillaAPI.csproj",
         "projectName": "MagicVilla_VillaAPI",
-        "projectPath": "C:\\Users\\belto\\source\\repos\\MagicVilla\\MagicVilla\\magicvilla_villaapi\\MagicVilla_VillaAPI.csproj",
+        "projectPath": "C:\\Users\\belto\\source\\repos\\MagicVilla\\MagicVilla\\MagicVilla_VillaAPI\\MagicVilla_VillaAPI.csproj",
         "packagesPath": "C:\\Users\\belto\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\belto\\source\\repos\\MagicVilla\\MagicVilla\\magicvilla_villaapi\\obj\\",
+        "outputPath": "C:\\Users\\belto\\source\\repos\\MagicVilla\\MagicVilla\\MagicVilla_VillaAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\belto\\AppData\\Roaming\\NuGet\\NuGet.Config",

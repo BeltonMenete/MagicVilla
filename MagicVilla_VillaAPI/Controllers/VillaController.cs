@@ -1,32 +1,40 @@
+using System.Net;
 using AutoMapper;
-using MagicVilla_VillaAPI.Data;
-using MagicVilla_VillaAPI.DTOs;
+using magicvilla_villaapi.Models;
 using MagicVilla_VillaAPI.Models;
+using MagicVilla_VillaAPI.Models.DTOs;
 using MagicVilla_VillaAPI.Repositories.IRepositories;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
 
 namespace MagicVilla_VillaAPI.Controllers;
 
 [ApiController]
 [Route("api/villa")]
-public class VillaController(ILogger<VillaController> logger, IVillaRepository dbVilla, IMapper mapper) : ControllerBase
+public class VillaController : ControllerBase
 {
-    private readonly ILogger<VillaController> _logger = logger;
-    private readonly IVillaRepository _dbVilla = dbVilla;
-    private readonly IMapper _mapper = mapper;
+
+    protected APIResponse _response;
+    private readonly IVillaRepository _dbVilla;
+    private readonly IMapper _mapper;
+
+    public VillaController(IVillaRepository dbVilla, IMapper mapper)
+    {
+        _dbVilla = dbVilla;
+        _mapper = mapper;
+        this._response = new APIResponse();
+    }
+
 
     // Get All Villas
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<VillaDTO>> GetVillas()
+    public async Task<ActionResult<APIResponse>> GetVillas()
     {
-        _logger.LogInformation("____ Getting All Vilas _____");
         var villaList = await _dbVilla.GetAllAsync();
-
-        return Ok(_mapper.Map<List<VillaDTO>>(villaList));
+        _response.Result = _mapper.Map<List<VillaDTO>>(villaList);
+        _response.StatusCode = HttpStatusCode.OK;
+        return Ok(_response.Result);
     }
 
     // Get a Specific Villa by ID
@@ -135,7 +143,6 @@ public class VillaController(ILogger<VillaController> logger, IVillaRepository d
         return NoContent();  // Return 204 No Content on success
 
     }
-    const string projects = "fullOfNothing";
     [HttpDelete("{id:int}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using MagicVilla_VillaAPI.DTOs;
+using MagicVilla_VillaAPI.Controllers.DTOs;
 using MagicVilla_VillaAPI.Models;
 
 namespace MagicVilla_VillaAPI;
