@@ -11,19 +11,12 @@ namespace MagicVilla_VillaAPI.Controllers;
 
 [ApiController]
 [Route("api/villa")]
-public class VillaController : ControllerBase
+public class VillaController(IVillaRepository dbVilla, IMapper mapper) : ControllerBase
 {
 
-    protected APIResponse _response;
-    private readonly IVillaRepository _dbVilla;
-    private readonly IMapper _mapper;
-
-    public VillaController(IVillaRepository dbVilla, IMapper mapper)
-    {
-        _dbVilla = dbVilla;
-        _mapper = mapper;
-        this._response = new APIResponse();
-    }
+    protected APIResponse _response = new();
+    private readonly IVillaRepository _dbVilla = dbVilla;
+    private readonly IMapper _mapper = mapper;
 
 
     // Get All Villas
@@ -34,7 +27,7 @@ public class VillaController : ControllerBase
         var villaList = await _dbVilla.GetAllAsync();
         _response.Result = _mapper.Map<List<VillaDTO>>(villaList);
         _response.StatusCode = HttpStatusCode.OK;
-        return Ok(_response.Result);
+        return Ok(_response);
     }
 
     // Get a Specific Villa by ID
@@ -42,12 +35,11 @@ public class VillaController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<VillaDTO>> GetVilla(int id)
+    public async Task<ActionResult<APIResponse>> GetVilla(int id)
     {
         // Validations
         if (id <= 0)
         {
-            _logger.LogError($"-----  Villa: {id} BadRequest --------");
             return BadRequest();
         }
 
@@ -56,14 +48,12 @@ public class VillaController : ControllerBase
 
         if (villa == null)
         {
-            _logger.LogWarning($"----- c Villa{id} not found --------");
             ModelState.AddModelError("ERROR: ", $"Villa with Id: {id} not found");
             return NotFound(ModelState);
         }
-
-        _logger.LogInformation($"----- Getting specific Villa {id} --------");
-        return Ok(_mapper.Map<VillaDTO>(villa));
-
+        _response.Result = _mapper.Map<VillaDTO>(villa);
+        _response.StatusCode = HttpStatusCode.OK;
+        return Ok(_response);
     }
     // Add New Villa To DataBase
 
@@ -71,18 +61,20 @@ public class VillaController : ControllerBase
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<ActionResult<Villa>> CreateVilla([FromBody] CreateVillaDTO createDTO)
+    public async Task<ActionResult<APIResponse>> CreateVilla([FromBody] CreateVillaDTO createDTO)
     {
         // Validations
         if (createDTO == null)
             return BadRequest();
 
         //Mapping
-        var model = _mapper.Map<Villa>(createDTO);
+        var villa = _mapper.Map<Villa>(createDTO);
 
-        await _dbVilla.CreateAsync(model);
+        await _dbVilla.CreateAsync(villa);
+        _response.Result = villa;
+        _response.StatusCode = HttpStatusCode.Created;
         await _dbVilla.SaveAsync();
-        return CreatedAtRoute("GetVilla", new { id = model.Id }, model);
+        return CreatedAtRoute("GetVilla", new { id = villa.Id }, _response);
     }
 
     // Update specific villa all prop by prop (PUT)
@@ -90,7 +82,7 @@ public class VillaController : ControllerBase
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult> UpdateVilla(int id, [FromBody] UpdateVillaDTO updateDTO)
+    public async Task<ActionResult<APIResponse>> UpdateVilla(int id, [FromBody] UpdateVillaDTO updateDTO)
     {
         if (id <= 0)
             return BadRequest();
@@ -107,9 +99,14 @@ public class VillaController : ControllerBase
         }
 
         villa = _mapper.Map<Villa>(updateDTO);
+
         await _dbVilla.UpdateAsync(villa);
         await _dbVilla.SaveAsync();
-        return NoContent();
+        _response.Result = villa;
+        _response.StatusCode = HttpStatusCode.NoContent;
+        _response.IsSuccess = true;
+        //return Ok(_response);
+        return _response;
 
     }
 
