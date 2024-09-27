@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace magicvilla_villaapi.Models
 {
-    public class APIResponse
+    public class ApiResponse
     {
         public HttpStatusCode StatusCode { get; set; }
         public bool IsSuccess { get; set; }
-        public List<string> ErrorMessages { get; set; }
-        public object Result { get; set; }
+        public List<string>? ErrorMessages { get; set; }
+        public object? Result { get; set; }
     }
 }
