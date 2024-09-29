@@ -1,9 +1,5 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MagicVilla_VillaAPI.Models
 {
@@ -21,6 +17,5 @@ namespace MagicVilla_VillaAPI.Models
         public string? ImageUrl { get; set; }
         public string? Amenity { get; set; }
         public DateTime UpdatedDate;
-
     }
 }
