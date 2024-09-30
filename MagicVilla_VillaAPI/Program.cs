@@ -14,6 +14,7 @@ string? connectionString = builder.Configuration.GetConnectionString("MSSQLS");
 string? connectionString2 = builder.Configuration.GetConnectionString("Postgres");
 
 builder.Services.AddScoped<IVillaRepository, VillaRepository>();
+builder.Services.AddScoped<IVillaNumberRepository, VillaNumberRepository>();
 builder.Services.AddAutoMapper(typeof(MappingConfig));
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connectionString2));
 builder.Services.AddEndpointsApiExplorer();

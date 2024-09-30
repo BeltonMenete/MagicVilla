@@ -11,11 +11,11 @@ namespace MagicVilla_VillaAPI.Controllers;
 
 [ApiController]
 [Route("api/villa")]
-public class VillaController(IVillaRepository dbVilla, IMapper mapper) : ControllerBase
+public class VillaController(IVillaRepository repo, IMapper mapper) : ControllerBase
 {
 
     protected ApiResponse _response = new();
-    private readonly IVillaRepository _dbVilla = dbVilla;
+    private readonly IVillaRepository _repo = repo;
     private readonly IMapper _mapper = mapper;
 
 
@@ -26,7 +26,7 @@ public class VillaController(IVillaRepository dbVilla, IMapper mapper) : Control
     {
         try
         {
-            var villaList = await _dbVilla.GetAllAsync();
+            var villaList = await _repo.GetAllAsync();
             _response.Result = _mapper.Map<List<VillaDTO>>(villaList);
             _response.StatusCode = HttpStatusCode.OK;
             return Ok(_response);
@@ -57,7 +57,7 @@ public class VillaController(IVillaRepository dbVilla, IMapper mapper) : Control
                 return BadRequest(_response);
             }
             // retrieve
-            var villa = await _dbVilla.GetAsync(x => x.Id == id);
+            var villa = await _repo.GetAsync(x => x.Id == id);
 
             if (villa == null)
             {
@@ -85,19 +85,32 @@ public class VillaController(IVillaRepository dbVilla, IMapper mapper) : Control
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult<ApiResponse>> CreateVilla([FromBody] CreateVillaDTO createDTO)
     {
-        // Validations
-        if (createDTO == null)
-            return BadRequest();
+        try
+        {
+            // Validations
+            if (createDTO == null)
+            {
+                _response.IsSuccess = false;
+                _response.StatusCode = HttpStatusCode.BadRequest;
+                return BadRequest(_response);
+            }
 
-        //Mapping
-        var villa = _mapper.Map<Villa>(createDTO);
+            //Mapping
+            var villa = _mapper.Map<Villa>(createDTO);
 
-        await _dbVilla.CreateAsync(villa);
-        _response.Result = villa;
-        _response.StatusCode = HttpStatusCode.Created;
-        _response.IsSuccess = true;
-        await _dbVilla.SaveAsync();
-        return CreatedAtRoute("GetVilla", new { id = villa.Id }, _response);
+            await _repo.CreateAsync(villa);
+            await _repo.SaveAsync();
+            _response.Result = villa;
+            _response.StatusCode = HttpStatusCode.Created;
+            return CreatedAtRoute("GetVilla", new { id = villa.Id }, _response);
+        }
+        catch (Exception error)
+        {
+            _response.ErrorMessages = [error.Message.ToString()];
+            _response.IsSuccess = false;
+            return _response;
+        }
+
     }
 
     // Update specific villa all prop by prop (PUT)
@@ -124,7 +137,7 @@ public class VillaController(IVillaRepository dbVilla, IMapper mapper) : Control
                 return BadRequest(_response);
             }
 
-            var villa = await _dbVilla.GetAsync(x => x.Id == id, false);
+            var villa = await _repo.GetAsync(x => x.Id == id, false);
 
             if (villa == null)
             {
@@ -136,8 +149,8 @@ public class VillaController(IVillaRepository dbVilla, IMapper mapper) : Control
 
             villa = _mapper.Map<Villa>(updateDTO);
 
-            await _dbVilla.UpdateAsync(villa);
-            await _dbVilla.SaveAsync();
+            await _repo.UpdateAsync(villa);
+            await _repo.SaveAsync();
             _response.Result = villa;
             _response.StatusCode = HttpStatusCode.NoContent;
             _response.IsSuccess = true;
@@ -163,7 +176,7 @@ public class VillaController(IVillaRepository dbVilla, IMapper mapper) : Control
         try
         {
             // Retrieve the existing villa entity from the database (tracking enabled)
-            var villa = await _dbVilla.GetAsync(x => x.Id == id, false);
+            var villa = await _repo.GetAsync(x => x.Id == id, false);
 
             if (villa == null)
             {
@@ -190,8 +203,8 @@ public class VillaController(IVillaRepository dbVilla, IMapper mapper) : Control
             villa = _mapper.Map<Villa>(villa2);
 
             // Update the entity in the database (tracked entity is already being monitored)
-            await _dbVilla.UpdateAsync(villa);
-            await _dbVilla.SaveAsync();  // Save the changes to the database
+            await _repo.UpdateAsync(villa);
+            await _repo.SaveAsync();  // Save the changes to the database
             _response.StatusCode = HttpStatusCode.NoContent;
             return NoContent();  // Return 204 No Content on success
         }
@@ -222,7 +235,7 @@ public class VillaController(IVillaRepository dbVilla, IMapper mapper) : Control
                 return BadRequest(_response);
             }
 
-            var villa = await _dbVilla.GetAsync(x => x.Id == id);
+            var villa = await _repo.GetAsync(x => x.Id == id);
 
             if (villa == null)
             {
@@ -232,8 +245,8 @@ public class VillaController(IVillaRepository dbVilla, IMapper mapper) : Control
                 return NotFound(_response);
             }
 
-            await _dbVilla.RemoveAsync(villa);
-            await _dbVilla.SaveAsync();
+            await _repo.RemoveAsync(villa);
+            await _repo.SaveAsync();
             _response.StatusCode = HttpStatusCode.NoContent;
             return NoContent();
         }
