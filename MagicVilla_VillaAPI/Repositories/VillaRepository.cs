@@ -12,19 +12,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MagicVilla_VillaAPI.Repositories;
 
-public class VillaRepository : Repository<Villa>, IVillaRepository
+public class VillaRepository(ApplicationDbContext context) : Repository<Villa>(context), IVillaRepository
 {
-    private readonly ApplicationDbContext _context;
-    public VillaRepository(ApplicationDbContext context) : base(context)
-    {
-        _context = context;
-    }
+    private readonly ApplicationDbContext _context = context;
 
     public async Task<Villa> UpdateAsync(Villa entity)
     {
-        entity.UpdatedDate = DateTime.Now;
+        entity.UpdatedDate = DateTime.UtcNow;
         _context.Villas.Update(entity);
-        await _context.SaveChangesAsync();
+        await SaveAsync();
         return entity;
     }
 }

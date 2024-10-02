@@ -18,7 +18,7 @@ public class Repository<T> : IRepository<T> where T : class
         _context = context;
         this.DbSet = _context.Set<T>();
     }
-    public async Task CreateAsync(T entity)
+    public async virtual Task CreateAsync(T entity)
     {
         await _context.AddAsync(entity);
         await SaveAsync();

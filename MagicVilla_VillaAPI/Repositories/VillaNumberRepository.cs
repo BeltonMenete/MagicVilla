@@ -13,17 +13,17 @@ namespace MagicVilla_VillaAPI.Repositories
     {
         private readonly ApplicationDbContext _context = context;
 
-        public new async Task CreateAsync(VillaNumber entity)
+        public override async Task CreateAsync(VillaNumber entity)
         {
-            entity.CreateDate = DateTime.Now;
-            await _context.VillaNumbers.AddAsync(entity);
-            await _context.SaveChangesAsync();
+            entity.CreateDate = DateTime.UtcNow;
+            await _context.AddAsync(entity);
+            await SaveAsync();
         }
         public async Task<VillaNumber> UpdateAsync(VillaNumber entity)
         {
-            entity.UpdatedDate = DateTime.Now;
+            entity.UpdatedDate = DateTime.UtcNow;
             _context.VillaNumbers.Update(entity);
-            await _context.SaveChangesAsync();
+            await SaveAsync();
             return entity;
         }
     }

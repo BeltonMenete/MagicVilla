@@ -122,17 +122,10 @@ public class VillaController(IVillaRepository repo, IMapper mapper) : Controller
     {
         try
         {
-            if (id <= 0)
+            if (id != updateDTO.Id || id <= 0 || updateDTO == null)
             {
                 _response.IsSuccess = false;
-                _response.ErrorMessages = ["Invalid Id"];
-                return BadRequest(_response);
-            }
-
-            if (id != updateDTO.Id || updateDTO == null)
-            {
-                _response.IsSuccess = false;
-                _response.ErrorMessages = ["Invalid ID or Villa model"];
+                _response.ErrorMessages = ["Invalid Object or Id"];
                 _response.StatusCode = HttpStatusCode.BadRequest;
                 return BadRequest(_response);
             }
@@ -175,7 +168,7 @@ public class VillaController(IVillaRepository repo, IMapper mapper) : Controller
     {
         try
         {
-            // Retrieve the existing villa entity from the database (tracking enabled)
+            // Retrieve the existing villa entity from the database (tracking disabled)
             var villa = await _repo.GetAsync(x => x.Id == id, false);
 
             if (villa == null)
