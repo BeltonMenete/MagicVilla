@@ -15,7 +15,7 @@ namespace MagicVilla_VillaAPI.Repositories
 
         public override async Task CreateAsync(VillaNumber entity)
         {
-            entity.CreateDate = DateTime.UtcNow;
+            entity.CreatedDate = DateTime.UtcNow;
             await _context.AddAsync(entity);
             await SaveAsync();
         }

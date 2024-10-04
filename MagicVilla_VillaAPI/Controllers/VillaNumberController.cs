@@ -16,7 +16,6 @@ namespace MagicVilla_VillaAPI.Controllers
         private readonly IVillaNumberRepository _repo = repo;
         protected ApiResponse _response = new();
 
-
         //GetAll
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -69,6 +68,7 @@ namespace MagicVilla_VillaAPI.Controllers
         [HttpPost(Name = "CreateVillaNumber")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<ApiResponse>> CreateVillaNumber([FromBody] CreateVillaNumberDTO createVillaNumber)
         {
@@ -88,7 +88,7 @@ namespace MagicVilla_VillaAPI.Controllers
                 {
                     _response.StatusCode = HttpStatusCode.BadRequest;
                     _response.ErrorMessages = ["Villa Number already exists"];
-                    return BadRequest(_response);
+                    return Conflict(_response);
                 }
 
                 if (createVillaNumber == null)
@@ -100,8 +100,6 @@ namespace MagicVilla_VillaAPI.Controllers
                 }
 
                 var villaNumber = _mapper.Map<VillaNumber>(createVillaNumber);
-
-                villaNumber.CreateDate = DateTime.UtcNow;
                 villaNumber.UpdatedDate = DateTime.UtcNow;
 
                 await _repo.CreateAsync(villaNumber);
@@ -119,6 +117,84 @@ namespace MagicVilla_VillaAPI.Controllers
         }
 
         // Update existing Villa Number
-        [HttpPut]
+        [HttpPut("{villaNo:int}", Name = "UpdateVillaNumber")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<ApiResponse>> UpdateVillaNumber(int villaNo, [FromBody] UpdateVillaNumberDTO updateVillaNumberDTO)
+        {
+            try
+            {
+                if (updateVillaNumberDTO.VillaNo <= 0 || updateVillaNumberDTO == null)
+                {
+                    _response.IsSuccess = false;
+                    _response.StatusCode = HttpStatusCode.BadRequest;
+                    _response.ErrorMessages = ["Invalid Id or Villa Number"];
+                    return BadRequest(_response);
+                }
+                var villaNumber = await _repo.GetAsync(x => x.VillaNo == villaNo, false);
+
+                if (villaNumber == null)
+                {
+                    _response.IsSuccess = false;
+                    _response.ErrorMessages = ["Villa Number not found"];
+                    _response.StatusCode = HttpStatusCode.NotFound;
+                    return NotFound(_response);
+                }
+                villaNumber = _mapper.Map<VillaNumber>(updateVillaNumberDTO);
+                await _repo.UpdateAsync(villaNumber);
+                await _repo.SaveAsync();
+                _response.StatusCode = HttpStatusCode.NoContent;
+                return NoContent();
+            }
+            catch (Exception error)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessages = [error.Message.ToString()];
+                return _response;
+            }
+        }
+
+        // Deleting existing VillaNumber
+        [HttpDelete("{villaNo:int}", Name = "DeleteVillaNumber")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+
+        public async Task<ActionResult<ApiResponse>> DeleteVillaNumber(int villaNo)
+        {
+            try
+            {
+                if (villaNo <= 0)
+                {
+                    _response.IsSuccess = false;
+                    _response.StatusCode = HttpStatusCode.BadRequest;
+                    _response.ErrorMessages = ["Invalid ID"];
+                    return BadRequest(_response);
+                }
+
+                var villaNumber = await _repo.GetAsync(x => x.VillaNo == villaNo);
+                if (villaNumber == null)
+                {
+                    _response.IsSuccess = false;
+                    _response.ErrorMessages = ["Villa NotFound"];
+                    _response.StatusCode = HttpStatusCode.NotFound;
+                    return NotFound(_response);
+                }
+                else
+                {
+                    await _repo.RemoveAsync(villaNumber);
+                    return NoContent();
+                }
+            }
+            catch (Exception error)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessages = [error.Message.ToString()];
+                return _response;
+            }
+        }
+
     }
 }

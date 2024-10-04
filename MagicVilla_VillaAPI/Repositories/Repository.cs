@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 using magicvilla_villaapi.Repositories.IRepositories;
 using MagicVilla_VillaAPI.Data;
 using Microsoft.EntityFrameworkCore;
@@ -18,11 +14,16 @@ public class Repository<T> : IRepository<T> where T : class
         _context = context;
         this.DbSet = _context.Set<T>();
     }
-    public async virtual Task CreateAsync(T entity)
+    public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>>? filter = null)
     {
-        await _context.AddAsync(entity);
-        await SaveAsync();
+        IQueryable<T> query = DbSet;
+
+        if (filter != null)
+            query = query.Where(filter);
+        return await query.ToListAsync();
     }
+
+
 
     public async Task<T> GetAsync(Expression<Func<T, bool>>? filter = null, bool tracked = true)
     {
@@ -38,15 +39,12 @@ public class Repository<T> : IRepository<T> where T : class
 
     }
 
-    public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>>? filter = null)
+
+    public async virtual Task CreateAsync(T entity)
     {
-        IQueryable<T> query = DbSet;
-
-        if (filter != null)
-            query = query.Where(filter);
-        return await query.ToListAsync();
+        await _context.AddAsync(entity);
+        await SaveAsync();
     }
-
 
     public async Task RemoveAsync(T entity)
     {

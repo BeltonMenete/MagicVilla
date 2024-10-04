@@ -8,7 +8,7 @@ namespace MagicVilla_VillaAPI.Models
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int VillaNo { get; set; }
         public string? SpecialDetails { get; set; }
-        public DateTime CreateDate { get; set; }
+        public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
     }
 }
