@@ -8,6 +8,8 @@ namespace MagicVilla_VillaAPI.Models.DTOs.VillaNumberDTOs
         [Required]
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int VillaNo { get; set; }
+        [Required]
+        public required int VillaId { get; set; }
         public string? SpecialDetails { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
