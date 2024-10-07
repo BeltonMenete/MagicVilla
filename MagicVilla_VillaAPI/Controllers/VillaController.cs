@@ -3,7 +3,6 @@ using AutoMapper;
 using magicvilla_villaapi.Models;
 using MagicVilla_VillaAPI.Models;
 using MagicVilla_VillaAPI.Models.DTOs;
-using MagicVilla_VillaAPI.Models.DTOs.VillaDTOs;
 using MagicVilla_VillaAPI.Repositories.IRepositories;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -28,7 +27,7 @@ public class VillaController(IVillaRepository villas, IMapper mapper) : Controll
         try
         {
             var villaList = await _villas.GetAllAsync();
-            _response.Result = _mapper.Map<List<VillaDTO>>(villaList);
+            _response.Result = _mapper.Map<List<Villa>>(villaList);
             _response.StatusCode = HttpStatusCode.OK;
             return Ok(_response);
         }
@@ -67,7 +66,7 @@ public class VillaController(IVillaRepository villas, IMapper mapper) : Controll
                 _response.StatusCode = HttpStatusCode.NotFound;
                 return NotFound(_response);
             }
-            _response.Result = _mapper.Map<VillaDTO>(villa);
+            _response.Result = villa;
             _response.StatusCode = HttpStatusCode.OK;
             return Ok(_response);
         }
@@ -180,9 +179,9 @@ public class VillaController(IVillaRepository villas, IMapper mapper) : Controll
                 return NotFound(_response);
             }  // Return 404 if villa not found
 
-            var villa2 = _mapper.Map<UpdateVillaDTO>(villa);
+            var villaUpdateDTO = _mapper.Map<UpdateVillaDTO>(villa);
             // Apply the patch directly to the entity instead of the DTO
-            patchDTO.ApplyTo(villa2, ModelState);
+            patchDTO.ApplyTo(villaUpdateDTO, ModelState);
 
             // Check if the patch operation resulted in a valid state
             if (!ModelState.IsValid)
@@ -194,7 +193,7 @@ public class VillaController(IVillaRepository villas, IMapper mapper) : Controll
             }
 
 
-            villa = _mapper.Map<Villa>(villa2);
+            villa = _mapper.Map<Villa>(villaUpdateDTO);
 
             // Update the entity in the database (tracked entity is already being monitored)
             await _villas.UpdateAsync(villa);
