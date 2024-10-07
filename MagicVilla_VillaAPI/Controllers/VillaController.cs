@@ -15,7 +15,7 @@ namespace MagicVilla_VillaAPI.Controllers;
 public class VillaController(IVillaRepository villas, IMapper mapper) : ControllerBase
 {
 
-    protected ApiResponse _response = new();
+    protected APIResponse _response = new();
     private readonly IVillaRepository _villas = villas;
     private readonly IMapper _mapper = mapper;
 
@@ -23,7 +23,7 @@ public class VillaController(IVillaRepository villas, IMapper mapper) : Controll
     // Get All Villas
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<ApiResponse>> GetVillas()
+    public async Task<ActionResult<APIResponse>> GetVillas()
     {
         try
         {
@@ -45,7 +45,7 @@ public class VillaController(IVillaRepository villas, IMapper mapper) : Controll
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<ApiResponse>> GetVilla(int id)
+    public async Task<ActionResult<APIResponse>> GetVilla(int id)
     {
         try
         {
@@ -84,7 +84,7 @@ public class VillaController(IVillaRepository villas, IMapper mapper) : Controll
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<ActionResult<ApiResponse>> CreateVilla([FromBody] CreateVillaDTO createDTO)
+    public async Task<ActionResult<APIResponse>> CreateVilla([FromBody] CreateVillaDTO createDTO)
     {
         try
         {
@@ -119,7 +119,7 @@ public class VillaController(IVillaRepository villas, IMapper mapper) : Controll
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<ApiResponse>> UpdateVilla(int id, [FromBody] UpdateVillaDTO updateDTO)
+    public async Task<ActionResult<APIResponse>> UpdateVilla(int id, [FromBody] UpdateVillaDTO updateDTO)
     {
         try
         {
@@ -165,7 +165,7 @@ public class VillaController(IVillaRepository villas, IMapper mapper) : Controll
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<ApiResponse>> UpdatePartialVilla(int id, JsonPatchDocument<UpdateVillaDTO> patchDTO)
+    public async Task<ActionResult<APIResponse>> UpdatePartialVilla(int id, JsonPatchDocument<UpdateVillaDTO> patchDTO)
     {
         try
         {
@@ -217,7 +217,7 @@ public class VillaController(IVillaRepository villas, IMapper mapper) : Controll
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<ActionResult<ApiResponse>> DeleteVilla(int? id)
+    public async Task<ActionResult<APIResponse>> DeleteVilla(int? id)
     {
         try
         {

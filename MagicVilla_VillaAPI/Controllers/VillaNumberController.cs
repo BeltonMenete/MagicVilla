@@ -15,12 +15,12 @@ public class VillaNumberController(IVillaNumberRepository villaNumbers, IVillaRe
     private readonly IMapper _mapper = mapper;
     private readonly IVillaRepository _villas = villas;
     private readonly IVillaNumberRepository _villaNumbers = villaNumbers;
-    protected ApiResponse _response = new();
+    protected APIResponse _response = new();
 
     //GetAll
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<ApiResponse>> GetVillas()
+    public async Task<ActionResult<APIResponse>> GetVillas()
     {
         _response.Result = await _villaNumbers.GetAllAsync();
         _response.StatusCode = HttpStatusCode.OK;
@@ -32,7 +32,7 @@ public class VillaNumberController(IVillaNumberRepository villaNumbers, IVillaRe
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<ApiResponse>> GetVillaNumber(int villaNo)
+    public async Task<ActionResult<APIResponse>> GetVillaNumber(int villaNo)
     {
         try
         {
@@ -72,7 +72,7 @@ public class VillaNumberController(IVillaNumberRepository villaNumbers, IVillaRe
     [ProducesResponseType(StatusCodes.Status409Conflict)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<ActionResult<ApiResponse>> CreateVillaNumber([FromBody] CreateVillaNumberDTO createVillaNumber)
+    public async Task<ActionResult<APIResponse>> CreateVillaNumber([FromBody] CreateVillaNumberDTO createVillaNumber)
     {
         try
         {
@@ -134,7 +134,7 @@ public class VillaNumberController(IVillaNumberRepository villaNumbers, IVillaRe
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<ActionResult<ApiResponse>> UpdateVillaNumber(int villaNo, [FromBody] UpdateVillaNumberDTO updateVillaNumber)
+    public async Task<ActionResult<APIResponse>> UpdateVillaNumber(int villaNo, [FromBody] UpdateVillaNumberDTO updateVillaNumber)
     {
         try
         {
@@ -190,7 +190,7 @@ public class VillaNumberController(IVillaNumberRepository villaNumbers, IVillaRe
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<ApiResponse>> VillaNumberPartial(int villaNo, [FromBody] JsonPatchDocument<UpdateVillaNumberDTO> patchDoc)
+    public async Task<ActionResult<APIResponse>> VillaNumberPartial(int villaNo, [FromBody] JsonPatchDocument<UpdateVillaNumberDTO> patchDoc)
     {
 
         try
@@ -257,7 +257,7 @@ public class VillaNumberController(IVillaNumberRepository villaNumbers, IVillaRe
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<ActionResult<ApiResponse>> DeleteVillaNumber(int villaNo)
+    public async Task<ActionResult<APIResponse>> DeleteVillaNumber(int villaNo)
     {
         try
         {

@@ -285,8 +285,3 @@ C:\Users\belto\source\repos\MagicVilla\MagicVilla\magicvilla_villaapi\obj\Debug\
 C:\Users\belto\source\repos\MagicVilla\MagicVilla\magicvilla_villaapi\obj\Debug\net8.0\MagicVilla_VillaAPI.pdb
 C:\Users\belto\source\repos\MagicVilla\MagicVilla\magicvilla_villaapi\obj\Debug\net8.0\MagicVilla_VillaAPI.genruntimeconfig.cache
 C:\Users\belto\source\repos\MagicVilla\MagicVilla\magicvilla_villaapi\obj\Debug\net8.0\ref\MagicVilla_VillaAPI.dll
-C:\Users\belto\source\repos\MagicVilla\MagicVilla\MagicVilla_VillaAPI\obj\Debug\net8.0\MagicVilla_VillaAPI.RazorAssemblyInfo.cache
-C:\Users\belto\source\repos\MagicVilla\MagicVilla\MagicVilla_VillaAPI\obj\Debug\net8.0\MagicVilla_VillaAPI.RazorAssemblyInfo.cs
-C:\Users\belto\source\repos\MagicVilla\MagicVilla\MagicVilla_VillaAPI\bin\Debug\net8.0\MagicVilla_VillaAPI.staticwebassets.endpoints.json
-C:\Users\belto\source\repos\MagicVilla\MagicVilla\MagicVilla_VillaAPI\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-C:\Users\belto\source\repos\MagicVilla\MagicVilla\MagicVilla_VillaAPI\obj\Debug\net8.0\staticwebassets\msbuild.MagicVilla_VillaAPI.Microsoft.AspNetCore.StaticWebAssetEndpoints.props

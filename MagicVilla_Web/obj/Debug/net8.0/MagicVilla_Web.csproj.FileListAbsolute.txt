@@ -29,6 +29,3 @@ C:\Users\belto\source\repos\MagicVilla\MagicVilla\MagicVilla_Web\obj\Debug\net8.
 C:\Users\belto\source\repos\MagicVilla\MagicVilla\MagicVilla_Web\obj\Debug\net8.0\MagicVilla_Web.pdb
 C:\Users\belto\source\repos\MagicVilla\MagicVilla\MagicVilla_Web\obj\Debug\net8.0\MagicVilla_Web.genruntimeconfig.cache
 C:\Users\belto\source\repos\MagicVilla\MagicVilla\MagicVilla_Web\obj\Debug\net8.0\ref\MagicVilla_Web.dll
-C:\Users\belto\source\repos\MagicVilla\MagicVilla\magicvilla_web\bin\Debug\net8.0\MagicVilla_Web.staticwebassets.endpoints.json
-C:\Users\belto\source\repos\MagicVilla\MagicVilla\magicvilla_web\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-C:\Users\belto\source\repos\MagicVilla\MagicVilla\magicvilla_web\obj\Debug\net8.0\staticwebassets\msbuild.MagicVilla_Web.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
