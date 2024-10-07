@@ -1,6 +1,30 @@
+# related to Magic Villa API
 /MagicVilla_VillaAPI/bin
 /MagicVilla_VillaAPI/vs
 /MagicVilla_VillaAPI/vscode
 /MagicVilla_VillaAPI/obj
 /MagicVilla_VillaAPI/.vs
 /.vs/MagicVilla/FileContentIndex/
+
+# related to Magic Villa Web
+
+/MagicVilla_Web/bin
+/MagicVilla_Web/vs
+/MagicVilla_Web/vscode
+/MagicVilla_Web/obj
+/.MagicVilla_Web/.vs
+/.vs/MagicVilla/FileContentIndex/
+
+# related to Magic Villa Utility
+
+/MagicVilla_Utility/bin
+/MagicVilla_Utility/vs
+/MagicVilla_Utility/vscode
+/MagicVilla_Utility/obj
+/MagicVilla_Utility/.vs
+/.vs/MagicVilla_Utility/FileContentIndex/
+
+
+
+
+

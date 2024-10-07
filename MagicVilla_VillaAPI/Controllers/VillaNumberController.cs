@@ -36,7 +36,6 @@ public class VillaNumberController(IVillaNumberRepository villaNumbers, IVillaRe
     {
         try
         {
-
             if (villaNo <= 0)
             {
                 _response.ErrorMessages = ["Invalid Id"];
@@ -102,7 +101,6 @@ public class VillaNumberController(IVillaNumberRepository villaNumbers, IVillaRe
                 return NotFound(_response);
             }
 
-
             if (createVillaNumber == null)
             {
                 _response.IsSuccess = false;
@@ -145,6 +143,7 @@ public class VillaNumberController(IVillaNumberRepository villaNumbers, IVillaRe
                 _response.StatusCode = HttpStatusCode.BadRequest;
                 return BadRequest(_response);
             }
+
             if (updateVillaNumber.VillaNo <= 0 || updateVillaNumber == null)
             {
                 _response.IsSuccess = false;
@@ -152,6 +151,7 @@ public class VillaNumberController(IVillaNumberRepository villaNumbers, IVillaRe
                 _response.ErrorMessages = ["Invalid Id or Villa Number"];
                 return BadRequest(_response);
             }
+
             var villaNumber = await _villaNumbers.GetAsync(x => x.VillaNo == villaNo, false);
 
             if (villaNumber == null)

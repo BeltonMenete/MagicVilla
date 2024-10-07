@@ -9,10 +9,11 @@ public class MappingConfig : Profile
 {
     public MappingConfig()
     {
+        // Villa DTOs Mapping
         CreateMap<Villa, CreateVillaDTO>().ReverseMap();
         CreateMap<Villa, UpdateVillaDTO>().ReverseMap();
 
-        // VillaNumbers DTOs mapping
+        // VillaNumbers DTOs Mapping
         CreateMap<VillaNumber, CreateVillaNumberDTO>().ReverseMap();
         CreateMap<VillaNumber, UpdateVillaNumberDTO>().ReverseMap();
     }

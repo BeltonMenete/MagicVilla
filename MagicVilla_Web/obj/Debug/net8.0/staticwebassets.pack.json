@@ -2,7 +2,7 @@
   "Files": [
     {
       "Id": "C:\\Users\\belto\\source\\repos\\MagicVilla\\MagicVilla\\MagicVilla_Web\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\MagicVilla_Web.bundle.scp.css",
-      "PackagePath": "staticwebassets\\MagicVilla_Web.xgo5b4rzs6.bundle.scp.css"
+      "PackagePath": "staticwebassets\\MagicVilla_Web.bundle.scp.css"
     },
     {
       "Id": "C:\\Users\\belto\\source\\repos\\MagicVilla\\MagicVilla\\MagicVilla_Web\\wwwroot\\css\\site.css",
@@ -243,10 +243,6 @@
     {
       "Id": "C:\\Users\\belto\\source\\repos\\MagicVilla\\MagicVilla\\MagicVilla_Web\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
-    },
-    {
-      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.MagicVilla_Web.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
-      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.MagicVilla_Web.Microsoft.AspNetCore.StaticWebAssets.props",
