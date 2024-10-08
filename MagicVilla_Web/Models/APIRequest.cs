@@ -4,7 +4,7 @@ namespace MagicVilla_Web.Models;
 
 public class APIRequest
 {
-    public ApiType APIType { get; set; }
+    public ApiRequestMethod ApiRequestMethod { get; set; }
     public string? Url { get; set; }
     public object? Data { get; set; }
 }

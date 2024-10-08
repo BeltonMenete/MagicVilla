@@ -2,7 +2,7 @@
 
 public static class SD
 {
-    public enum ApiType
+    public enum ApiRequestMethod
     {
         GET,
         POST,
